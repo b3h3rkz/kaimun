@@ -13,6 +13,7 @@ from kaimun.users.views import (
     confirm_email,
     UserModelViewSet,
 )
+from country.views import CountryModelViewSet
 
 
 from rest_framework import routers
@@ -20,6 +21,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 
 router.register(r'users', UserModelViewSet, base_name='user_acct')
+router.register(r'countries', CountryModelViewSet, base_name='countries')
 
 urlpatterns = [
      # Django Admin, use {% url 'admin:index' %}
