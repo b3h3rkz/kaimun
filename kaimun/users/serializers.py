@@ -18,7 +18,6 @@ class UserModelSerializer(ModelSerializer):
             'first_name',
             'last_name',
             'email',
-            'verification_completed',
             'date_joined',
             'last_login',
         ]
