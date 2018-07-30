@@ -1,18 +1,23 @@
-from typing import Any
-
+# -*- coding: utf-8 -*-
+from django.conf import settings
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
-from django.conf import settings
-from django.http import HttpRequest
 
 
 class AccountAdapter(DefaultAccountAdapter):
 
-    def is_open_for_signup(self, request: HttpRequest):
-        return getattr(settings, "ACCOUNT_ALLOW_REGISTRATION", True)
+    def send_mail(self, template_prefix, email, context):
+        context['activate_url'] = settings.URL_FRONT + \
+            'access/verify-email/' + context['key']
+        msg = self.render_mail(template_prefix, email, context)
+        msg.content_subtype = 'html'
+        msg.send()
+
+    def is_open_for_signup(self, request):
+        return getattr(settings, 'ACCOUNT_ALLOW_REGISTRATION', True)
 
 
 class SocialAccountAdapter(DefaultSocialAccountAdapter):
+    def is_open_for_signup(self, request, sociallogin):
+        return getattr(settings, 'ACCOUNT_ALLOW_REGISTRATION', True)
 
-    def is_open_for_signup(self, request: HttpRequest, sociallogin: Any):
-        return getattr(settings, "ACCOUNT_ALLOW_REGISTRATION", True)

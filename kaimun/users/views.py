@@ -1,52 +1,78 @@
-from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from __future__ import absolute_import, unicode_literals
+from allauth.account.views import ConfirmEmailView
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.views import APIView
+from .models import User
+from .serializers import (
+    UserModelSerializer,
+    VerifyEmailSerializer,
+)
+from rest_framework.viewsets import ModelViewSet
+from rest_framework import status
+from rest_framework.decorators import (
+    api_view,
+    list_route,
+    detail_route
+)
+from rest_framework.response import Response
 
-User = get_user_model()
+
+@api_view()
+def null_view(request):
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
+class VerifyEmailView(APIView, ConfirmEmailView):
+    allowed_methods = ('POST', 'OPTIONS', 'HEAD')
 
+    def get_serializer(self, *args, **kwargs):
+        return VerifyEmailSerializer(*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.kwargs['key'] = serializer.validated_data['key']
+        confirmation = self.get_object()
+        confirmation.confirm(self.request)
+        return Response({'detail': _('ok')}, status=status.HTTP_200_OK)
+
+
+confirm_email = VerifyEmailView.as_view()
+
+
+class MultiSerializerViewSetMixin(object):
+    def get_serializer_class(self):
+        try:
+            return self.serializer_action_classes[self.action]
+        except (KeyError, AttributeError):
+            return super(MultiSerializerViewSetMixin, self).get_serializer_class()
+
+
+class UserModelViewSet(ModelViewSet):
+    """
+    User Endpoints
+    """
     model = User
-    slug_field = "username"
-    slug_url_kwarg = "username"
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserModelSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
 
 
-user_detail_view = UserDetailView.as_view()
 
 
-class UserListView(LoginRequiredMixin, ListView):
-
-    model = User
-    slug_field = "username"
-    slug_url_kwarg = "username"
 
 
-user_list_view = UserListView.as_view()
 
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
-
-    model = User
-    fields = ["name"]
-
-    def get_success_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
-
-    def get_object(self):
-        return User.objects.get(username=self.request.user.username)
 
 
-user_update_view = UserUpdateView.as_view()
 
 
-class UserRedirectView(LoginRequiredMixin, RedirectView):
-
-    permanent = False
-
-    def get_redirect_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
 
 
-user_redirect_view = UserRedirectView.as_view()
+
+
+
+

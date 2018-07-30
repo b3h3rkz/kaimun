@@ -62,3 +62,6 @@ INSTALLED_APPS += ['django_extensions']  # noqa F405
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+URL_FRONT = 'http://localhost:8080/app/#/'
+ACCOUNT_PASSWORD_RESET_CONFIRM = URL_FRONT + 'access/password-reset/confirm/'

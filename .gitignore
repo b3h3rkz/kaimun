@@ -282,3 +282,10 @@ pip-selfcheck.json
 kaimun/media/
 
 .pytest_cache/
+
+
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+.idea/*
