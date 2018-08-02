@@ -276,6 +276,7 @@ tags
 pyvenv.cfg
 pip-selfcheck.json
 
+keys.py
 
 ### Project template
 

@@ -6,10 +6,11 @@ from rest_framework import status
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from .serializers import TransactionModelSerializer
 from .models import Transaction
-from rest_framework.decorators import list_route, detail_route
-from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
+from rest_framework.decorators import list_route
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from .money_wave_utils import *
 import json
+from config.settings.keys import *
 
 
 class TransactionModelViewSet(ModelViewSet):
@@ -54,7 +55,7 @@ class TransactionModelViewSet(ModelViewSet):
     def ravepayment_request(self, request):
         hashedPayload = ''
         payload = {
-            "PBFPubKey": 'FLWPUBK-3d15ffa5c7ec93883c651c0f441bc2d0-X',
+            "PBFPubKey": FLW_API_KEY,
             "amount": request.data['amount'],
             "payment_method": "both",
             "custom_description": "Kaimun",
@@ -87,7 +88,7 @@ class TransactionModelViewSet(ModelViewSet):
         url = "https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/xrequery"
         data = {
             "txref": request.data['txRef'],
-            "SECKEY": "FLWSECK-b86e4802fc5eaa03db5e7f73fdc4514e-X",
+            "SECKEY" : FLW_API_SECRET,
             "include_payment_entity": 1
         }
         response = requests.post(url, data=data).json()
@@ -101,9 +102,7 @@ class TransactionModelViewSet(ModelViewSet):
 
         # confirm that the response for the transaction is successful
         if response['status'] == 'success':
-            # confirm that the amount for that transaction is the amount you wanted to charge
             data = response['data']
-            # print(data[0]['chargedamount'])
             if data[0]['chargecode'] == '00':
                 chargedamount = float(data[0]['chargedamount'])
                 if chargedamount > amount:
@@ -111,12 +110,13 @@ class TransactionModelViewSet(ModelViewSet):
                         if make_transfer:
                             return Response({'message': 'Successfully Sent Funds'}, status=status.HTTP_200_OK)
                         else:
-                            return Response({'message': '1Unable  to send funds'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                            return Response({'message': 'Unable  to send funds'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                 else:
-                    return Response({'message': '2Unable  to send funds'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                    return Response({'message': 'Unable  to send funds'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             else:
                 return Response({'message': 'Transaction was not successful'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        ##changing this to ok for simulation purposes, the moneywave api isn't bring the correct response
         else:
-            return Response({'message': '4Unable  to send funds'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'message': '4Unable  to send funds'}, status=status.HTTP_200_OK)
 
 

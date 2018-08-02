@@ -5,6 +5,7 @@ Set of utility methods for use with the moneywave api
 import requests
 from random import randint
 import os
+from config.settings.keys import *
 
 BASE_URL = "https://moneywave.herokuapp.com/v1/"
 auth_token = ''
@@ -12,8 +13,7 @@ auth_token = ''
 
 def get_auth_token():
     url = BASE_URL + "merchant/verify"
-    # payload = {'apiKey': os.environ['MONEY_RAVE_API_KEY'], 'secret': os.environ['MONEY_RAVE_API_SECRET']}
-    payload = {'apiKey': 'ts_JIGRALK6O6YGH196OGPM', 'secret': 'ts_SHU80QZ8NAO2H2ZZPIFHYQD4WQZGMA'}
+    payload = {'apiKey': MONEY_RAVE_API_KEY, 'secret': MONEY_RAVE_API_SECRET}
     headers = {'content-type': 'application/json'}
     response = requests.request("POST", url, json=payload, headers=headers).json()
     print(response)
@@ -58,7 +58,7 @@ def disburse(account_number, bankcode, amount, narration, currency, sender):
         "ref": get_ref(),
         "currency": currency,
         "senderName": sender,
-        "lock": "00000000"
+        "lock": NAIRA_WALLET_LOCK
     }
     response = requests.post(url, json=payload, headers=headers).json()
     print(response)
