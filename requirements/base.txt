@@ -20,3 +20,5 @@ django-rest-auth==0.9.1
 djangorestframework-jwt==1.9.0
 django-cors-headers==2.4.0
 django-debug-toolbar==1.9.1
+django-extensions
+six>=1.2
