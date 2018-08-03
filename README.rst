@@ -45,14 +45,13 @@ Make sure to have the following on your host:
 
 
 * Run install dependencies ::
-    $ pip install -r requirements/local.txt
+     $ pip install -r requirements/local.txt
 
 
 * create a file **keys.py** in the config.settings package and add the following constants to it ::
 
 
     MONEY_RAVE_API_KEY = "key"
-
 
     MONEY_RAVE_API_SECRET = "key"
 
