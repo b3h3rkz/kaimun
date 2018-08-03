@@ -48,7 +48,7 @@ Make sure to have the following on your host:
     $ pip install -r requirements/local.txt
 
 
-* create a file **keys.py** in the config.settings package and add the following constants to it
+* create a file **keys.py** in the config.settings package and add the following constants to it ::
 
 
     MONEY_RAVE_API_KEY = "key"
@@ -65,7 +65,7 @@ Make sure to have the following on your host:
     $ python manage.py migrate
 
 
-* See the application being served through Django development server:
+* See the application being served through Django development server::
     $ python manage.py runserver 0.0.0.0:8000
 
 Test coverage
