@@ -1,7 +1,7 @@
 kaimun
 ======
 
-Behold My Awesome Project!
+Kaimun App
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
@@ -21,16 +21,36 @@ Moved to settings_.
 Basic Commands
 --------------
 
-Setting Up Your Users
+Setting Up the project
+
+Make sure to have the following on your host:
+
+*virtualenv;
+*pip;
+*PostgreSQL.
+
 ^^^^^^^^^^^^^^^^^^^^^
 
-* To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
+* create a database called **kaimun**
 
-* To create an **superuser account**, use this command::
+* clone this repository ::
 
-    $ python manage.py createsuperuser
+    $ git clone https://github.com/b3h3rkz/kaimun.git
 
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
+
+* create and activate a virtualenv
+
+
+* Run install dependencies ::
+    $ pip install -r requirements/local.txt
+
+
+* Apply migrations ::
+    $ python manage.py migrate
+
+
+* See the application being served through Django development server:
+    $ python manage.py runserver 0.0.0.0:8000
 
 Test coverage
 ^^^^^^^^^^^^^
@@ -48,21 +68,6 @@ Running tests with py.test
 
   $ pytest
 
-Live reloading and Sass CSS compilation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Moved to `Live reloading and SASS compilation`_.
-
-.. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html
-
-
-
-
-
-Deployment
-----------
-
-The following details how to deploy this application.
 
 
 
