@@ -6,7 +6,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = 'IOQXCpOBrQbYv434XDey5cWEI5Pk3eouUz2CABj3yt50kLbowdnmY1vVS87GrjwN'
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['api.kaimun.com']
+ALLOWED_HOSTS = ['*']
 
 # DATABASES
 # ------------------------------------------------------------------------------
