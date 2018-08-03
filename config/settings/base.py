@@ -235,9 +235,9 @@ ADMINS = [
 MANAGERS = ADMINS
 
 # for use with the custom signup serializer
-REST_AUTH_REGISTER_SERIALIZERS = {
-        'REGISTER_SERIALIZER': 'kaimun.users.register_serializer.CustomRegisterSerializer',
-}
+# REST_AUTH_REGISTER_SERIALIZERS = {
+#         # 'REGISTER_SERIALIZER': 'kaimun.users.register_serializer.CustomRegisterSerializer',
+# }
 
 # django-allauth
 # ------------------------------------------------------------------------------
