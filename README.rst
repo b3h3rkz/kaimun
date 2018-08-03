@@ -66,10 +66,23 @@ Make sure to have the following on your host:
 
 
 * Apply migrations ::
+
     $ python manage.py migrate
 
 
+
+* Add countries for demo data ::
+
+    $ ./manage.py shell
+    >>>from country.models import Country
+    >>> ng = Country(name="Nigeria", currency="NGN", iso_code="NG")
+    >>>gh  = Country(name="Ghana", currency="GHS", iso_code="GH")
+    >>>ng.save()
+    >>>gh.save()
+
+
 * See the application being served through Django development server::
+
     $ python manage.py runserver 0.0.0.0:8000
 
 Test coverage
@@ -86,7 +99,7 @@ Running tests with py.test
 
 ::
 
-  $ pytest
+   $ pytest
 
 
 

@@ -7,7 +7,7 @@ from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from .serializers import TransactionModelSerializer
 from .models import Transaction
 from rest_framework.decorators import list_route
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
 from .money_wave_utils import *
 import json
 from config.settings.keys import *
@@ -15,8 +15,8 @@ from config.settings.keys import *
 
 class TransactionModelViewSet(ModelViewSet):
     model = Transaction
+    permission_classes = [AllowAny]
     serializer_class = TransactionModelSerializer
-    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Transaction.objects.filter(user=self.request.user).order_by('-modified_on')
