@@ -242,16 +242,17 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 # ------------------------------------------------------------------------------
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_REQUIRED = True
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = 'kaimun.users.adapters.AccountAdapter'
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = 'kaimun.users.adapters.SocialAccountAdapter'
 
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+EMAIL_CONFIRMATION_SIGNUP = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_ALLOW_REGISTRATION = True
+ACCOUNT_ADAPTER = 'barbary.users.adapters.AccountAdapter'
+LOGOUT_ON_PASSWORD_CHANGE = False
+AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = 'account_login'
+AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 
 # Your stuff...
 # ------------------------------------------------------------------------------

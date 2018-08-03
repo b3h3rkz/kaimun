@@ -25,9 +25,12 @@ Setting Up the project
 
 Make sure to have the following on your host:
 
-*virtualenv;
-*pip;
-*PostgreSQL.
+* virtualenv;
+
+* pip;
+
+
+* PostgreSQL.
 
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -48,13 +51,13 @@ Make sure to have the following on your host:
 * create a file **keys.py** in the config.settings package and add the following constants to it
 
 
-    MONEY_RAVE_API_KEY = "ts_JIGRALK6O6YGH196OGPM"
-    MONEY_RAVE_API_SECRET = "ts_SHU80QZ8NAO2H2ZZPIFHYQD4WQZGMA"
-    NAIRA_WALLET_LOCK = "wallet"
-    CEDIS_WALLET_LOCK = "wallet"
+    MONEY_RAVE_API_KEY = "key"
+    MONEY_RAVE_API_SECRET = "key"
+    NAIRA_WALLET_LOCK = "password"
+    CEDIS_WALLET_LOCK = "password"
 
-    FLW_API_KEY = "FLWPUBK-7190665490e67cc89349a02e72008423-X"
-    FLW_API_SECRET = "FLWSECK-8d2e8e6b018085d9d914556af311f9e2-X"
+    FLW_API_KEY = "FLWPUBK-=ere-X"
+    FLW_API_SECRET = "FLWSECK--X"
 
 
 
