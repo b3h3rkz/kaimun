@@ -52,11 +52,16 @@ Make sure to have the following on your host:
 
 
     MONEY_RAVE_API_KEY = "key"
+
+
     MONEY_RAVE_API_SECRET = "key"
+
     NAIRA_WALLET_LOCK = "password"
+
     CEDIS_WALLET_LOCK = "password"
 
     FLW_API_KEY = "FLWPUBK-=ere-X"
+
     FLW_API_SECRET = "FLWSECK--X"
 
 
