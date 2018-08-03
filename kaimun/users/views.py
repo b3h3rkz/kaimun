@@ -53,7 +53,7 @@ class UserModelViewSet(ModelViewSet):
     User Endpoints
     """
     model = User
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     serializer_class = UserModelSerializer
 
     def get_queryset(self):
